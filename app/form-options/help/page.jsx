@@ -21,19 +21,19 @@ function HelpForm() {
                         <p className="text-black font-semibold text-xl pb-4 font_lato">Query Information</p>
 
                         <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
-                            <Label htmlFor="email">Name</Label>
+                            <Label htmlFor="name">Name</Label>
                             <Input type="text" id="name" placeholder="Name" required/>
                         </div>
 
 
 
                         <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
-                            <Label htmlFor="email">Company</Label>
+                            <Label htmlFor="company">Company</Label>
                             <Input type="text" id="company" placeholder="Company" required/>
                         </div>
 
                         <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
-                            <Label htmlFor="email">Contact No.</Label>
+                            <Label htmlFor="contact">Contact No.</Label>
                             <Input type="number" id="contact" placeholder="+91" required/>
                         </div>
 
