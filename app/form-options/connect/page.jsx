@@ -1,32 +1,38 @@
 "use client"
 
-import * as React from "react"
-import { Check, ChevronsUpDown } from "lucide-react"
-import { cn } from "@/lib/utils"
 import { useState } from 'react';
 import Image from 'next/image';
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+import { Switch } from "@/components/ui/switch"
 
 
+import DatePicker from "@components/datePicker";
+import Dropdown from "@components/dropdown";
+
+const hubs = [
+  {
+    value: "Gurgaon",
+    label: "Gurgaon",
+  },
+  {
+    value: "Noida",
+    label: "Noida",
+  },
+  {
+    value: "Ahmdebad",
+    label: "Ahemdabad",
+  },
+]
 
 function ConnectForm() {
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
+
+  const handleSwitchChange = () => {
+    setShowAdditionalInfo((prevState) => !prevState);
+  };
 
   return (
     <>
@@ -44,18 +50,18 @@ function ConnectForm() {
             <p className="text-black font-semibold text-xl pb-4 font_lato">Service Information</p>
 
             <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
-              <Label htmlFor="email">IA Hub</Label>
-              <Input type="text" id="hub" placeholder="IA Hub" required />
+              <Label htmlFor="hub">IA Hub</Label>
+              <Dropdown params={hubs} label="Select Hub" />
             </div>
 
             <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
-              <Label htmlFor="email">Domain</Label>
-              <Input type="text" id="domain" placeholder="Domain" required />
+              <Label htmlFor="domain">Domain</Label>
+              <Dropdown params={hubs} label="Select Domain" />
             </div>
 
             <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
-              <Label htmlFor="email">Sub-domain</Label>
-              <Input type="text" id="subdomain" placeholder="Sub-domain" required />
+              <Label htmlFor="subdomain">Sub-domain</Label>
+              <Dropdown params={hubs} label="Select sub-domain" />
             </div>
 
             <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
@@ -63,32 +69,26 @@ function ConnectForm() {
               <Textarea placeholder="Type your query here" className="resize-none hide_scrollbar" id="message" required />
             </div>
 
-            <p className="text-black font-semibold text-xl pb-4 font_lato mt-8">Additional Information</p>
-            <div className='flex justify-center gap-10'>
-              <div>
-                <input type="radio" id="yes" name="additional-info" onClick={() => setShowAdditionalInfo(true)} />
-                <label htmlFor="yes">Yes</label>
-              </div>
-              <div>
-                <input type="radio" id="no" name="additional-info" onClick={() => setShowAdditionalInfo(false)} />
-                <label htmlFor="no">No</label>
-              </div>
+            <div className="flex my-5 justify-between items-center">
+              <p className="text-black font-semibold text-xl pr-4 font_lato">Additional Information</p>
+              <Switch checked={showAdditionalInfo} onCheckedChange={handleSwitchChange} />
             </div>
+
             {showAdditionalInfo && (
               <>
                 <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
-                  <Label htmlFor="email">Expected Delivery</Label>
-                  <Input type="date" id="delivery" placeholder="Domain" />
+                  <Label htmlFor="delivery">Expected Delivery</Label>
+                  <DatePicker />
                 </div>
 
                 <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
                   <Label htmlFor="budget">Budget</Label>
-                  <Input type="number" id="budget" placeholder="Budget" />
+                  <Input type="number" id="budget" placeholder="₹" />
                 </div>
 
                 <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
                   <Label htmlFor="message">Enter your special requirements</Label>
-                  <Textarea placeholder="Special requirements" className="resize-none hide_scrollbar" id="message" required />
+                  <Textarea placeholder="Special requirements" className="resize-none hide_scrollbar" id="message" />
                 </div>
               </>
             )}
