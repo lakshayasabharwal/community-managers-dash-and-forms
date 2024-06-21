@@ -1,0 +1,9 @@
+div {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  }
+  
+div::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
