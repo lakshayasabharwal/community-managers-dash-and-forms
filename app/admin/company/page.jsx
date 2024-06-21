@@ -1,7 +1,5 @@
 "use client"
 
-import '@styles/companyView.css'
-
 const CompanyView = () => {
   const companies = [
     {
@@ -16,7 +14,7 @@ const CompanyView = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="container mx-auto">
-        <div className="bg-white p-6 rounded-lg shadow-md overflow-scroll">
+        <div className="bg-white p-6 rounded-lg shadow-md overflow-scroll hide_scrollbar">
           <h1 className="text-2xl font-bold text-center text-red-800 mb-4">Company Name</h1>
           <h2 className="text-xl font-semibold text-red-700 mb-2">Customer Information</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -32,7 +30,7 @@ const CompanyView = () => {
             <div><span className="font-semibold">Special Requirements:</span></div>
           </div>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-md mt-6 overflow-scroll">
+        <div className="bg-white p-6 rounded-lg shadow-md mt-6 overflow-scroll hide_scrollbar">
           <h2 className="text-xl font-semibold text-red-700 mb-2">Suggested Companies</h2>
           <table className="min-w-full bg-white border border-gray-200">
             <thead>
