@@ -1,2 +1,2 @@
-#Community Manager + QueryForms <br>
-##India Accelerator 
+# Community Manager + QueryForms
+## India Accelerator 
