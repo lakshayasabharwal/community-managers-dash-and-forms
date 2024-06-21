@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { Button } from "@/components/ui/button"
 
 function HelpForm() {
   return (
@@ -32,7 +33,7 @@ function HelpForm() {
                     </div>
 
                     <div className="text-center">
-                        <button type="submit" className="bg-red-700 text-white font-bold py-2 px-8 rounded hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-opacity-50">Submit</button>
+                        <Button type="submit" className="">Submit</Button>
                     </div>
                 </form>
             </div>
