@@ -1,45 +1,56 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+
 
 function HelpForm() {
-  return (
-    <>
+    return (
         <>
-            <div className="flex justify-center  bg-gradient-to-tr from-gray-100 via-gray-200 to-gray-300 py-10 min-h-screen flex-col sm:flex-row">
+            <div className="flex sm:justify-center py-10 min-h-screen flex-col sm:flex-row background_color">
 
-                <div className="bg-red-900 text-white text-center p-6 relative lg:rounded-l-lg lg:rounded-r-none shadow-lg">
-                    <Image src="/assets/IAlogo.png" height={200} width={200} className="mx-auto sm:h-16 md:h-24 lg:h-40 inline" alt="logo" />
-                    <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mt-4">How can we help you?</h1>
+                <div className="flex justify-around w-screen bg-white flex-col items-center sm:items-start sm:flex-row md:mx-32 lg:mx-48 rounded-3xl shadow-lg">
+
+                    <div className="bg-white text-black text-left pl-5 md:pt-5 sm:pt-5 rounded-3xl">
+                        <Image src="/assets/IAlogo.png" height={80} width={110} className="object-contain hidden sm:inline" alt="logo" />
+                        <h1 className="text-2xl font-semibold pt-4 font_lato">How can we help you?</h1>
+                    </div>
+
+                    <form className="bg-white px-8 pt-6 pb-8 lg:rounded-r-lg lg:rounded-l-none w-96 rounded-3xl">
+                        <p className="text-black font-semibold text-xl pb-4 font_lato">Query Information</p>
+
+                        <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
+                            <Label htmlFor="email">Name</Label>
+                            <Input type="text" id="name" placeholder="Name" required/>
+                        </div>
+
+
+
+                        <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
+                            <Label htmlFor="email">Company</Label>
+                            <Input type="text" id="company" placeholder="Company" required/>
+                        </div>
+
+                        <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
+                            <Label htmlFor="email">Contact No.</Label>
+                            <Input type="number" id="contact" placeholder="+91" required/>
+                        </div>
+
+                        <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
+                            <Label htmlFor="message">Enter Your Query</Label>
+                            <Textarea placeholder="Type your query here" className="resize-none hide_scrollbar" id="message" required/>
+                        </div>
+
+                        <div className="text-right">
+                            <Button type="submit">Submit</Button>
+                        </div>
+                    </form>
+
                 </div>
-
-                <form className="bg-white shadow-lg px-8 pt-6 pb-8 max-w-4xl w-full lg:rounded-r-lg lg:rounded-l-none">
-                    <p className="text-red-700 font-bold text-xl pb-4">Query Information</p>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                        <label className="text-left font-semibold col-span-1 self-center" htmlFor="name">Name :</label>
-                        <input type="text" id="name" className="col-span-2 bg-gray-100 border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-red-700" />
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                        <label className="text-left col-span-1 self-center font-semibold" htmlFor="company">Company :</label>
-                        <input type="text" id="company" className="col-span-2 bg-gray-100 border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-red-700" />
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                        <label className="text-left col-span-1 self-center font-semibold" htmlFor="contact">Contact No :</label>
-                        <input type="text" id="contact" className="col-span-2 bg-gray-100 border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-red-700" />
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                        <label className="text-left col-span-1 self-start font-semibold" htmlFor="complaint">Enter your query :</label>
-                        <textarea id="complaint" className="col-span-2 bg-gray-100 border border-gray-300 rounded px-4 py-2 resize-none h-32 focus:outline-none focus:border-red-700"></textarea>
-                    </div>
-
-                    <div className="text-center">
-                        <Button type="submit" className="">Submit</Button>
-                    </div>
-                </form>
             </div>
         </>
-    </>
-  )
+    )
 }
 
 export default HelpForm
