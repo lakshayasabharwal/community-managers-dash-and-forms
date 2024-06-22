@@ -12,7 +12,7 @@ const CompanyView = () => {
   ];
 
   return (
-    <div className="min-h-screen background_color p-6">
+    <div className="min-h-screen background_color p-6 font_lato">
       <div className="container mx-auto">
         <div className="bg-white p-6 rounded-lg shadow-sm overflow-scroll hide_scrollbar">
           <h1 className="text-2xl font-bold text-center text-red-800 mb-4">Company Name</h1>

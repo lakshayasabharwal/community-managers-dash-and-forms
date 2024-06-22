@@ -33,7 +33,7 @@ function CommunityManagerDashBoard() {
   ]);
  
   return (
-    <div className="min-h-screen bg-gradient-to-tr from-gray-100 via-gray-200 to-gray-300 p-4">
+    <div className="min-h-screen bg-gradient-to-tr from-gray-100 via-gray-200 to-gray-300 p-4 font_lato">
       <div className="container mx-auto">
         <div className="flex justify-between items-center mb-4">
           <div>
