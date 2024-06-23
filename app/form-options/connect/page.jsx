@@ -2,67 +2,102 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { Button } from "@/components/ui/button"
+import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+import { Switch } from "@/components/ui/switch"
+
+
+import DatePicker from "@components/datePicker";
+import Dropdown from "@components/dropdown";
+
+const hubs = [
+  {
+    value: "Gurgaon",
+    label: "Gurgaon",
+  },
+  {
+    value: "Noida",
+    label: "Noida",
+  },
+  {
+    value: "Ahmdebad",
+    label: "Ahemdabad",
+  },
+]
 
 function ConnectForm() {
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
 
+  const handleSwitchChange = () => {
+    setShowAdditionalInfo((prevState) => !prevState);
+  };
+
   return (
     <>
-      <div className="bg-gray-200 py-10 min-h-screen">
-        <div className="max-w-2xl mx-auto mt-12 bg-white shadow-lg rounded-lg overflow-hidden">
-          <div className="bg-red-900 text-white text-center p-6 relative">
-            <Image src="/assets/IAlogo.png" alt="IA Logo" width = {70} height={70} className="absolute top-4 left-4"/>
-            <h1 className="text-3xl font-bold">Requirement Form</h1>
+
+      <div className="flex sm:justify-center py-10 min-h-screen flex-col sm:flex-row background_color">
+
+        <div className="flex justify-around w-screen bg-white flex-col items-center sm:items-start sm:flex-row md:mx-32 lg:mx-48 rounded-3xl shadow-lg">
+
+          <div className="bg-gray-white text-black text-left pl-5 md:pt-5 sm:pt-5 rounded-3xl">
+            <Image src="/assets/IAlogo.png" height={80} width={110} className="object-contain hidden sm:inline" alt="logo" />
+            <h1 className="text-2xl font-semibold pt-4 font_lato">What is your requirement?</h1>
           </div>
-          <form className="p-6">
-            <div className="mb-8">
-              <h2 className="text-red-900 text-lg font-bold mb-4">Service Information</h2>
-              <label htmlFor="ia-hub" className="block font-semibold mb-2">IA Hub: <span className="text-red-600">*</span></label>
-              <select id="ia-hub" name="ia-hub" className="w-full p-2 mb-4 border border-gray-300 rounded bg-gray-100" required>
-                <option value=""></option>
-              </select>
 
-              <label htmlFor="domain" className="block font-semibold mb-2">Domain: <span className="text-red-600">*</span></label>
-              <select id="domain" name="domain" className="w-full p-2 mb-4 border border-gray-300 rounded bg-gray-100" required>
-                <option value=""></option>
-              </select>
+          <form className="bg-white px-8 pt-6 pb-8 lg:rounded-r-lg lg:rounded-l-none w-96 rounded-3xl">
+            <p className="text-black font-semibold text-xl pb-4 font_lato">Service Information</p>
 
-              <label htmlFor="sub-domain" className="block font-semibold mb-2">Sub-domain: <span className="text-red-600">*</span></label>
-              <select id="sub-domain" name="sub-domain" className="w-full p-2 mb-4 border border-gray-300 rounded bg-gray-100" required>
-                <option value=""></option>
-              </select>
-
-              <label htmlFor="query" className="block font-semibold mb-2">Enter your query: <span className="text-red-600">*</span></label>
-              <textarea id="query" name="query" className="w-full p-2 mb-4 border border-gray-300 rounded h-20 resize-none bg-gray-100" required style={{ overflow: 'hidden' }}></textarea>
+            <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
+              <Label htmlFor="hub">IA Hub</Label>
+              <Dropdown params={hubs} label="Select Hub" />
             </div>
 
-            <div className="mb-8">
-              <h2 className="text-red-900 text-lg font-bold mb-4">Additional Information</h2>
-              <div className='flex justify-center gap-10'>
-                <div>
-                <input type="radio" id="yes" name="additional-info" onClick={() => setShowAdditionalInfo(true)} />
-                <label htmlFor="yes">Yes</label>
-                </div>
-                <div>
-                <input type="radio" id="no" name="additional-info" onClick={() => setShowAdditionalInfo(false)} />
-                <label htmlFor="no">No</label>
-                </div>
-              </div>
-              {showAdditionalInfo && (
-                <>
-                  <label className="block font-semibold mb-2">Expected Delivery :</label>
-                  <input type="date" name="expected-delivery" className="w-full p-2 mb-4 border border-gray-300 rounded bg-gray-100"/>
-
-                  <label className="block font-semibold mb-2">Budget :</label>
-                  <input type="number" name="budget" className="w-full p-2 mb-4 border border-gray-300 rounded bg-gray-100"/>
-
-                  <label className="block font-semibold mb-2">Special Requirements :</label>
-                  <textarea name="special-requirements" className="w-full p-2 mb-4 border border-gray-300 rounded h-20 resize-none bg-gray-100" style={{ overflow: 'hidden' }}></textarea>
-                </>
-              )}
+            <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
+              <Label htmlFor="domain">Domain</Label>
+              <Dropdown params={hubs} label="Select Domain" />
             </div>
-            <button type="submit" className="w-full bg-red-900 text-white py-3 rounded hover:bg-red-700">Submit</button>
+
+            <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
+              <Label htmlFor="subdomain">Sub-domain</Label>
+              <Dropdown params={hubs} label="Select sub-domain" />
+            </div>
+
+            <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
+              <Label htmlFor="message">Enter Your Query</Label>
+              <Textarea placeholder="Type your query here" className="resize-none hide_scrollbar" id="message" required />
+            </div>
+
+            <div className="flex my-5 justify-between items-center">
+              <p className="text-black font-semibold text-xl pr-4 font_lato">Additional Information</p>
+              <Switch checked={showAdditionalInfo} onCheckedChange={handleSwitchChange} />
+            </div>
+
+            {showAdditionalInfo && (
+              <>
+                <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
+                  <Label htmlFor="delivery">Expected Delivery</Label>
+                  <DatePicker />
+                </div>
+
+                <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
+                  <Label htmlFor="budget">Budget</Label>
+                  <Input type="number" id="budget" placeholder="₹" />
+                </div>
+
+                <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
+                  <Label htmlFor="message">Enter your special requirements</Label>
+                  <Textarea placeholder="Special requirements" className="resize-none hide_scrollbar" id="message" />
+                </div>
+              </>
+            )}
+
+            <div className="text-right">
+              <Button type="submit">Submit</Button>
+            </div>
           </form>
+
         </div>
       </div>
     </>

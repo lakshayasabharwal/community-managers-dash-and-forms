@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button"
 
 export default function Home() {
   const [selectedOption, setSelectedOption] = useState('');
@@ -11,60 +12,52 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-white">
-      <div className=" p-6 rounded-lg w-full max-w-lg">
-        <h1 className="text-2xl font-semibold mb-6 text-center text-gray-800">How can we help you?</h1>
-        <div className="flex justify-center gap-4 mb-6">
-          <div
-            className={`flex p-4 items-center justify-center w-48 h-32 bg-gray-100 rounded-lg shadow-lg cursor-pointer hover:bg-gray-100 transition ${selectedOption === 'option1' ? 'ring-2 ring-red-800' : ''}`}
-            onClick={() => setSelectedOption('option1')}
-          >
-            <input
-              type="radio"
-              name="option"
-              value="option1"
-              checked={selectedOption === 'option1'}
-              onChange={handleOptionChange}
-              className="form-radio h-5 w-5 text-red-800"
-            />
-            <span className="ml-2 text-gray-700">Need help at your co-working space?</span>
+    <div className="min-h-screen flex flex-col justify-center items-center background_color">
+      <div>
+        <h1 className="text-2xl font-semibold mb-6 p-5 text-center text-gray-800 font_lato">How can we help you?</h1>
+        <div className="w-min">
+          <div className="flex justify-center gap-4 mb-8 font_lato">
+            <label className={`flex p-4 items-center justify-center w-48 h-32 bg-white rounded-xl shadow-md cursor-pointer hover:bg-gray-50 transition ${selectedOption === 'option1' ? 'ring-2 ring-gray-800' : ''}`}>
+              <input
+                type="radio"
+                name="option"
+                value="option1"
+                checked={selectedOption === 'option1'}
+                onChange={handleOptionChange}
+                className="form-radio hidden"
+              />
+              <span className="text-gray-700">Need help at your <br className="hidden sm:inline" /> co-working space?</span>
+            </label>
+            <label className={`flex p-4 items-center justify-center w-48 h-32 bg-white rounded-xl shadow-md cursor-pointer hover:bg-gray-50 transition ${selectedOption === 'option2' ? 'ring-2 ring-gray-800' : ''}`}>
+              <input
+                type="radio"
+                name="option"
+                value="option2"
+                checked={selectedOption === 'option2'}
+                onChange={handleOptionChange}
+                className="form-radio hidden"
+              />
+              <span className="text-gray-700">Need help with <br /> your business?</span>
+            </label>
           </div>
-          <div
-            className={`flex p-4 items-center justify-center w-48 h-32 bg-gray-100 rounded-lg shadow-lg cursor-pointer hover:bg-gray-100 transition ${selectedOption === 'option2' ? 'ring-2 ring-red-800' : ''}`}
-            onClick={() => setSelectedOption('option2')}
-          >
-            <input
-              type="radio"
-              name="option"
-              value="option2"
-              checked={selectedOption === 'option2'}
-              onChange={handleOptionChange}
-              className="form-radio h-5 w-5 text-red-800"
-            />
-            <span className="ml-2 text-gray-700">Need help with your business?</span>
-          </div>
-        </div>
-        {
-          selectedOption === '' ? (
-            <button disabled
-              className="mt-6 w-full py-2 px-4 bg-red-900 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-75 transition"
-            >
-              Continue
-            </button>
-          ) : (
-            <Link href={selectedOption === 'option1' ? '/form-options/help' : '/form-options/connect'}>
-              <button
-                className="mt-6 w-full py-2 px-4 bg-red-800 text-white font-semibold rounded-lg shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-75 transition"
+          {
+            selectedOption === '' ? (
+              <Button disabled
+                className="w-full"
               >
-                Continue
-              </button>
-            </Link>
-          )
-        }
-
-
-
-
+                Next
+              </Button>
+            ) : (
+              <Link href={selectedOption === 'option1' ? '/form-options/help' : '/form-options/connect'}>
+                <Button
+                  className="w-full"
+                >
+                  Next
+                </Button>
+              </Link>
+            )
+          }
+        </div>
       </div>
     </div>
   );
