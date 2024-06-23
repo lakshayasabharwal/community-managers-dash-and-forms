@@ -1,0 +1,125 @@
+{
+  "companies": [
+    {
+      "id": 1,
+      "name": "Company A",
+      "contact": "1234567890",
+      "hub": "Gurgaon",
+      "email": "contact@companya.com",
+      "url": "https://www.companya.com",
+      "domain": "Technology",
+      "sub_domain": "Software Development"
+    },
+    {
+      "id": 2,
+      "name": "Company B",
+      "contact": "1234567891",
+      "hub": "Gurgaon",
+      "email": "contact@companyb.com",
+      "url": "https://www.companyb.com",
+      "domain": "Fintech",
+      "sub_domain": "Accounting Software"
+    },
+    {
+      "id": 3,
+      "name": "Company C",
+      "contact": "1234567892",
+      "hub": "Gurgaon",
+      "email": "contact@companyc.com",
+      "url": "https://www.companyc.com",
+      "domain": "Fintech",
+      "sub_domain": "Blockchain"
+    }
+  ],
+
+  "complaints": [
+    {
+      "id": 1,
+      "company": "Company A",
+      "complaint": "Coffee machine has stopped working.",
+      "timestamp": "2024-04-30T00:00:00Z",
+      "isHandled": false
+    },
+    {
+      "id": 2,
+      "company": "Company B",
+      "complaint": "AC is malfunctioning",
+      "timestamp": "2024-03-30T00:00:00Z",
+      "isHandled": false
+    }
+  ],
+
+  "requirements": [
+    {
+      "id": 1,
+      "company": "Company C",
+      "timestamp": "",
+      "isHandled": false,
+      "requirement": "Looking for a new accounting software that integrates with our current systems.",
+      "hub": "Gurgaon",
+      "domain": "Fintech",
+      "subdomain": "Accounting Software",
+      "delivery": "2024-09-30T00:00:00Z",
+      "budget": 50000,
+      "specialRequirement": "Must support multiple currencies"
+    },
+    {
+      "id": 2,
+      "company": "Company A",
+      "timestamp": "",
+      "isHandled": false,
+      "requirement": "Need to develop an app for our online business",
+      "hub": "Gurgaon",
+      "domain": "Technology",
+      "subdomain": "Software Development",
+      "delivery": "2024-07-30T00:00:00Z",
+      "budget": 10000,
+      "specialRequirement": "Flutter"
+    }
+  ],
+  
+  "domains": [
+    {
+      "id": 1,
+      "name": "Technology",
+      "subdomains": [
+        {
+          "id": 1,
+          "name": "Software Development"
+        },
+        {
+          "id": 2,
+          "name": "Artificial Intelligence"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Healthcare",
+      "subdomains": [
+        {
+          "id": 3,
+          "name": "Medical Devices"
+        },
+        {
+          "id": 4,
+          "name": "Pharmaceuticals"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Fintech",
+      "subdomains": [
+        {
+          "id": 5,
+          "name": "Accounting Software"
+        },
+        {
+          "id": 6,
+          "name": "Blockchain"
+        }
+      ]
+    }
+  ]
+}
