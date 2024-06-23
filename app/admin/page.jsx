@@ -21,7 +21,7 @@ const initialData = [
     companyName: "Company B",
     timestamp: "2024-06-20T12:00:00Z",
     type: "requirement",
-  },
+  }
   // Add more data as needed
 ];
 

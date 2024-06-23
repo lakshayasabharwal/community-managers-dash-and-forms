@@ -13,7 +13,6 @@ import { ArrowUpDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-
 import { Input } from "@/components/ui/input";
 import {
     Table,
@@ -27,7 +26,7 @@ import {
 
 // Function to calculate remaining SLA time in hours
 const calculateRemainingSLA = (timestamp) => {
-    //implementation
+    // Implementation
 };
 
 const columns = [
@@ -49,29 +48,11 @@ const columns = [
         enableSorting: false,
         enableHiding: false,
     },
-    /* 
-    {
-        accessorKey: "companyLogo",
-        header: "Logo",
-        cell: ({ row }) => (
-            <img
-                src={row.getValue("companyLogo")}
-                alt="Company Logo"
-                className="h-10 w-10 rounded-full"
-            />
-        ),
-    },
-    */
     {
         accessorKey: "companyName",
         header: "Company",
         cell: ({ row }) => (
             <div className="font-semibold text-gray-800 flex items-center gap-2">
-               {/*  <img
-                src={row.getValue("companyLogo")}
-                alt="Company Logo"
-                className="h-10 w-10 rounded-full"
-            />*/}
                 {row.getValue("companyName")}
             </div>
         ),
@@ -91,23 +72,13 @@ const columns = [
             <div className="text-sm text-gray-500">{row.getValue("timestamp")}</div>
         ),
     },
-    
     {
         accessorKey: "type",
         header: "Type",
         cell: ({ row }) => (
-            <div className={row.getValue("type") === "complaint" ? "text-sm font-normal w-fit px-2 py-0 rounded-xl opacity-80 text-white bg-red-700": "text-sm font-normal w-fit px-2 py-0 opacity-80 rounded-xl text-white bg-yellow-700"}>{row.getValue("type")}</div>
+            <div className={row.getValue("type") === "complaint" ? "text-sm font-normal w-fit px-2 py-0 rounded-md opacity-80 text-white bg-red-700" : "text-sm font-normal w-fit px-2 py-0 opacity-80 rounded-md text-white bg-yellow-700"}>{row.getValue("type")}</div>
         ),
     },
-    /*{
-        id: "actions",
-        enableHiding: false,
-        cell: ({ row }) => (
-            <div className="flex items-center space-x-2">
-                <Button>View More</Button>
-            </div>
-        ),
-    },*/
     {
         accessorKey: "sla",
         header: "SLA (hrs)",
@@ -119,7 +90,7 @@ const columns = [
     },
 ];
 
-function DataTable({initialData}) {
+function DataTable({ initialData }) {
     const [data, setData] = useState(initialData);
     const [sorting, setSorting] = useState([]);
     const [columnFilters, setColumnFilters] = useState([]);
@@ -146,9 +117,8 @@ function DataTable({initialData}) {
         setData,
     });
 
-
     return (
-        <div className="w-full p-4 background_color min-h-screen font_lato">
+        <div className="w-full p-5 background_color min-h-screen font_lato">
             <div className="flex items-center py-4">
                 <Input
                     placeholder="Filter company names..."
@@ -158,10 +128,9 @@ function DataTable({initialData}) {
                     }
                     className="max-w-sm shadow-sm"
                 />
-
             </div>
             <div className="rounded-md border bg-white shadow-sm">
-                <Table>
+                <Table className="">
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id}>
@@ -191,7 +160,7 @@ function DataTable({initialData}) {
                                         <TableCell key={cell.id}>
                                             {flexRender(
                                                 cell.column.columnDef.cell,
-                                                { ...cell.getContext(), table } // Pass table prop explicitly
+                                                { ...cell.getContext(), table }
                                             )}
                                         </TableCell>
                                     ))}
@@ -206,9 +175,31 @@ function DataTable({initialData}) {
                         )}
                     </TableBody>
                 </Table>
-            </div>      
+            </div>
+            <div className="flex items-center justify-between py-2">
+                <Button
+                    variant="outline"
+                    onClick={() => table.previousPage()}
+                    disabled={!table.getCanPreviousPage()}
+                >
+                    Previous
+                </Button>
+                <span>
+                    Page{' '}
+                    <strong>
+                        {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+                    </strong>
+                </span>
+                <Button
+                    variant="outline"
+                    onClick={() => table.nextPage()}
+                    disabled={!table.getCanNextPage()}
+                >
+                    Next
+                </Button>
+            </div>
         </div>
     );
 }
 
-export default DataTable; 
+export default DataTable;
