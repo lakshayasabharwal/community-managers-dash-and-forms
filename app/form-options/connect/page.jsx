@@ -41,9 +41,10 @@ function ConnectForm() {
 
         <div className="flex justify-around w-screen bg-white flex-col items-center sm:items-start sm:flex-row md:mx-32 lg:mx-48 rounded-3xl shadow-lg">
 
-          <div className="bg-gray-white text-black text-left pl-5 md:pt-5 sm:pt-5 rounded-3xl">
+          <div className="sm:pl-5 md:pt-5 sm:pt-5 rounded-3xl w-full sm:max-w-80 text-center sm:text-left">
             <Image src="/assets/IAlogo.png" height={80} width={110} className="object-contain hidden sm:inline" alt="logo" />
             <h1 className="text-2xl font-semibold pt-4 font_lato">What is your requirement?</h1>
+            <p className="text-gray-400 mt-3">In line with your particular needs, we will pair you with a relevant startup within 24 hours.</p>
           </div>
 
           <form className="bg-white px-8 pt-6 pb-8 lg:rounded-r-lg lg:rounded-l-none w-96 rounded-3xl">
