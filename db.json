@@ -38,6 +38,8 @@
       "company": "Company A",
       "complaint": "Coffee machine has stopped working.",
       "timestamp": "2024-04-30T00:00:00Z",
+      "inquirerName": "Dhruv Saxena",
+      "inquirerContact": "1230981230",
       "isHandled": false
     },
     {
@@ -45,6 +47,8 @@
       "company": "Company B",
       "complaint": "AC is malfunctioning",
       "timestamp": "2024-03-30T00:00:00Z",
+      "inquirerName": "Tamatar Lal",
+      "inquirerContact": "1234350988",
       "isHandled": false
     }
   ],
