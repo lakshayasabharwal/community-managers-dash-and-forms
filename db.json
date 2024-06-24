@@ -49,30 +49,6 @@
       "inquirerName": "Tamatar Lal",
       "inquirerContact": "1234350988",
       "isHandled": false
-    },
-    {
-      "id": "59e8",
-      "company": "example company",
-      "complaint": "example complaint",
-      "inquirerName": "example name",
-      "inquirerContact": "2132341233",
-      "isHandled": false
-    },
-    {
-      "id": "3f13",
-      "company": "sdfgdfgsd",
-      "complaint": "h9i",
-      "inquirerName": "snickerdoodle",
-      "inquirerContact": "123",
-      "isHandled": false
-    },
-    {
-      "id": "58a7",
-      "company": "sdfgdfgsd",
-      "complaint": "gg",
-      "inquirerName": "snickerdoodle",
-      "inquirerContact": "1234",
-      "isHandled": false
     }
   ],
   "requirements": [

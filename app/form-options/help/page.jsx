@@ -69,24 +69,24 @@ function HelpForm() {
 
                         <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
                             <Label htmlFor="name">Name</Label>
-                            <Input type="text" id="name" placeholder="Name" name="name" onChange={handleChange} required/>
+                            <Input type="text" id="name" placeholder="Name" name="name" onChange={handleChange} value={formData.name} required/>
                         </div>
 
 
 
                         <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
                             <Label htmlFor="company">Company</Label>
-                            <Input type="text" id="company" placeholder="Company" name="company" required onChange={handleChange}/>
+                            <Input type="text" id="company" placeholder="Company" name="company" required value={formData.company} onChange={handleChange}/>
                         </div>
 
                         <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
                             <Label htmlFor="contact">Contact No.</Label>
-                            <Input type="number" id="contact" placeholder="Contact" name="contact" required onChange={handleChange}/>
+                            <Input type="number" id="contact" placeholder="Contact" name="contact" required value={formData.contact} onChange={handleChange}/>
                         </div>
 
                         <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
                             <Label htmlFor="complaint">Enter Your Query</Label>
-                            <Textarea placeholder="Type your query here" className="resize-none hide_scrollbar" name="complaint" id="complaint" required onChange={handleChange}/>
+                            <Textarea placeholder="Type your query here" className="resize-none hide_scrollbar" value={formData.complaint} name="complaint" id="complaint" required onChange={handleChange}/>
                         </div>
 
                         <div className="text-right">
