@@ -89,7 +89,7 @@ function ConnectForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:3001/complaints`, {
+      const response = await axios.post(`http://localhost:3001/requirements`, {
         hub: formData.hub,
         domain: formData.domain,
         subdomain: formData.subdomain,
