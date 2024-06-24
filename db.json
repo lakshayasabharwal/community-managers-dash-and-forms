@@ -1,7 +1,7 @@
 {
   "companies": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Company A",
       "contact": "1234567890",
       "hub": "Gurgaon",
@@ -11,7 +11,7 @@
       "subdomain": "Software Development"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Company B",
       "contact": "1234567891",
       "hub": "Gurgaon",
@@ -21,7 +21,7 @@
       "subdomain": "Accounting Software"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Company C",
       "contact": "1234567892",
       "hub": "Gurgaon",
@@ -31,10 +31,9 @@
       "subdomain": "Blockchain"
     }
   ],
-
   "complaints": [
     {
-      "id": 1,
+      "id": "1",
       "company": "Company A",
       "complaint": "Coffee machine has stopped working.",
       "timestamp": "2024-04-30T00:00:00Z",
@@ -43,19 +42,42 @@
       "isHandled": false
     },
     {
-      "id": 2,
+      "id": "2",
       "company": "Company B",
       "complaint": "AC is malfunctioning",
       "timestamp": "2024-03-30T00:00:00Z",
       "inquirerName": "Tamatar Lal",
       "inquirerContact": "1234350988",
       "isHandled": false
+    },
+    {
+      "id": "59e8",
+      "company": "example company",
+      "complaint": "example complaint",
+      "inquirerName": "example name",
+      "inquirerContact": "2132341233",
+      "isHandled": false
+    },
+    {
+      "id": "3f13",
+      "company": "sdfgdfgsd",
+      "complaint": "h9i",
+      "inquirerName": "snickerdoodle",
+      "inquirerContact": "123",
+      "isHandled": false
+    },
+    {
+      "id": "58a7",
+      "company": "sdfgdfgsd",
+      "complaint": "gg",
+      "inquirerName": "snickerdoodle",
+      "inquirerContact": "1234",
+      "isHandled": false
     }
   ],
-
   "requirements": [
     {
-      "id": 1,
+      "id": "1",
       "company": "Company C",
       "timestamp": "",
       "isHandled": false,
@@ -68,7 +90,7 @@
       "specialRequirement": "Must support multiple currencies"
     },
     {
-      "id": 2,
+      "id": "2",
       "company": "Company A",
       "timestamp": "",
       "isHandled": false,
@@ -81,10 +103,9 @@
       "specialRequirement": "Flutter"
     }
   ],
-  
   "domains": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Technology",
       "subdomains": [
         {
@@ -98,7 +119,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Healthcare",
       "subdomains": [
         {
@@ -112,7 +133,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Fintech",
       "subdomains": [
         {
@@ -126,14 +147,13 @@
       ]
     }
   ],
-
   "hubs": [
     {
-      "id": 1,
+      "id": "1",
       "location": "Gurgaon"
     },
     {
-      "id": 2,
+      "id": "2",
       "location": "Ahmdebad"
     }
   ]
