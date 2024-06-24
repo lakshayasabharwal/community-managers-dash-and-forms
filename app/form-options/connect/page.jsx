@@ -71,14 +71,19 @@ function ConnectForm() {
 
   const handleDropdownChange = (name, value) => {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
-    if (name === "domain") {
-      const selectedDomain = allDomains.find(domain => domain.name.toLowerCase() === value);
+    if (name.toLowerCase() === "domain") {
+      const selectedDomain = allDomains.find(domain => domain.name.toLowerCase() === value.toLowerCase());
       const subdomainsData = selectedDomain ? selectedDomain.subdomains.map(subdomain => ({
         label: subdomain.name,
         value: subdomain.name.toLowerCase()
       })) : [];
       setSubdomains(subdomainsData);
     }
+  };
+
+  const handleDateChange = (name, date) => {
+    console.log('date change');
+    setFormData((prevState) => ({ ...prevState, [name]: date }));
   };
 
   const handleSubmit = async (e) => {
@@ -121,17 +126,21 @@ function ConnectForm() {
 
           <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
             <Label htmlFor="hub">IA Hub</Label>
-            <Dropdown params={hubs} label="Select Hub" onSelect={(value) => handleDropdownChange('hub', value)} />
+
+
+            <Dropdown params={hubs} label="Select Hub" name="hub" handleDropdownChange={handleDropdownChange} />
+
+
           </div>
 
           <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
             <Label htmlFor="domain">Domain</Label>
-            <Dropdown params={domains} label="Select Domain" onSelect={(value) => handleDropdownChange('domain', value)} />
+            <Dropdown params={domains} name="domain" label="Select Domain" handleDropdownChange={handleDropdownChange} />
           </div>
 
           <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
             <Label htmlFor="subdomain">Sub-domain</Label>
-            <Dropdown params={subdomains} label="Select Sub-domain" onSelect={(value) => handleDropdownChange('subdomain', value)} />
+            <Dropdown params={subdomains} label="Select Sub-domain" name="subdomain" handleDropdownChange={handleDropdownChange} />
           </div>
 
           <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
@@ -148,7 +157,7 @@ function ConnectForm() {
             <>
               <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
                 <Label htmlFor="delivery">Expected Delivery</Label>
-                <DatePicker onSelect={(value) => handleDropdownChange('delivery', value)} name="delivery" value={formData.delivery} />
+                <DatePicker name="delivery" handleDateChange={handleDateChange} />
               </div>
 
               <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
