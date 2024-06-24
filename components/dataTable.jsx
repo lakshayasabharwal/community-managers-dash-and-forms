@@ -23,6 +23,13 @@ import {
     TableRow,
 } from "@/components/ui/table";
 
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 // Function to calculate remaining SLA time in hours
 const calculateRemainingSLA = (timestamp) => {
@@ -117,9 +124,17 @@ function DataTable({ initialData }) {
         setData,
     });
 
+    const handleTypeFilterChange = (value) => {
+        if (value === "all") {
+            table.setColumnFilters([]);
+        } else {
+            table.setColumnFilters([{ id: "type", value }]);
+        }
+    };
+
     return (
         <div className="w-full p-5 background_color min-h-screen font_lato">
-            <div className="flex items-center py-4">
+            <div className="flex items-center justify-between py-4">
                 <Input
                     placeholder="Filter company names..."
                     value={(table.getColumn("companyName")?.getFilterValue()) ?? ""}
@@ -128,6 +143,17 @@ function DataTable({ initialData }) {
                     }
                     className="max-w-sm shadow-sm"
                 />
+
+                <Select onValueChange={handleTypeFilterChange}>
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Filter" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="all">All</SelectItem>
+                        <SelectItem value="requirement">Requirement</SelectItem>
+                        <SelectItem value="complaint">Complaint</SelectItem>
+                    </SelectContent>
+                </Select>
             </div>
             <div className="rounded-md border bg-white shadow-sm">
                 <Table className="">
