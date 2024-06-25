@@ -88,6 +88,10 @@ function ConnectForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(formData.hub === '' || formData.domain === '' || formData.subdomain === ''){
+      alert('required fields not filled')
+      return;
+    }
     try {
       const response = await axios.post(`http://localhost:3001/requirements`, {
         hub: formData.hub,
@@ -108,6 +112,9 @@ function ConnectForm() {
         budget: '',
         specialRequirements: '',
       });
+
+      window.location.reload();         //to reset form
+
     } catch (error) {
       console.error('Error submitting form:', error);
     }
@@ -128,19 +135,19 @@ function ConnectForm() {
             <Label htmlFor="hub">IA Hub</Label>
 
 
-            <Dropdown params={hubs} label="Select Hub" name="hub" handleDropdownChange={handleDropdownChange} />
+            <Dropdown params={hubs} label="Select Hub" name="hub" handleDropdownChange={handleDropdownChange} required/>
 
 
           </div>
 
           <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
             <Label htmlFor="domain">Domain</Label>
-            <Dropdown params={domains} name="domain" label="Select Domain" handleDropdownChange={handleDropdownChange} />
+            <Dropdown params={domains} name="domain" label="Select Domain" handleDropdownChange={handleDropdownChange} required/>
           </div>
 
           <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
             <Label htmlFor="subdomain">Sub-domain</Label>
-            <Dropdown params={subdomains} label="Select Sub-domain" name="subdomain" handleDropdownChange={handleDropdownChange} />
+            <Dropdown params={subdomains} label="Select Sub-domain" name="subdomain" handleDropdownChange={handleDropdownChange} required/>
           </div>
 
           <div className="grid w-full max-w-sm items-center gap-1.5 py-5">
