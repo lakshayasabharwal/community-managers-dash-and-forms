@@ -88,6 +88,9 @@ function ConnectForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const timestamp = new Date().toISOString();
+
     if(formData.hub === '' || formData.domain === '' || formData.subdomain === ''){
       alert('required fields not filled')
       return;
@@ -101,7 +104,7 @@ function ConnectForm() {
         delivery: formData.delivery,
         budget: formData.budget,
         specialRequirements: formData.specialRequirements,
-        //timestamp: Date.now().toString()
+        timestamp: timestamp
       });
       console.log(response.data);
       setFormData({
