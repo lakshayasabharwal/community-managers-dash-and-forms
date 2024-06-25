@@ -28,6 +28,9 @@ function ConnectForm() {
     specialRequirements: '',
   });
 
+  //company of the user will be provided through their login credentials
+  const [userCompany, setUserCompany] = useState("Company A");
+
   useEffect(() => {
     const fetchHubs = async () => {
       try {
@@ -104,7 +107,9 @@ function ConnectForm() {
         delivery: formData.delivery,
         budget: formData.budget,
         specialRequirements: formData.specialRequirements,
-        timestamp: timestamp
+        timestamp: timestamp,
+        isHandled: false,
+        company: userCompany
       });
       console.log(response.data);
       setFormData({
