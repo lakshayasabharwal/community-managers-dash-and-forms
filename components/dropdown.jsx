@@ -3,22 +3,30 @@ import { cn } from "@/lib/utils"
 import { useState } from 'react';
 import { Button } from "@/components/ui/button"
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
 } from "@/components/ui/command"
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
 } from "@/components/ui/popover"
 
-const Dropdown = ({ params, label }) => {
+const Dropdown = ({ params, label, name, handleDropdownChange }) => {
     const [open, setOpen] = useState(false)
     const [value, setValue] = useState("")
+
+    const handleChange = (newValue) => {
+        setValue(newValue);
+        setOpen(false);
+        if (handleDropdownChange) {
+            handleDropdownChange(name, newValue);
+        }
+    };
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -47,6 +55,7 @@ const Dropdown = ({ params, label }) => {
                                     value={param.value}
                                     onSelect={(currentValue) => {
                                         setValue(currentValue === value ? "" : currentValue)
+                                        handleChange(currentValue === value ? "" : currentValue)
                                         setOpen(false)
                                     }}
                                 >

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     flexRender,
     getCoreRowModel,
@@ -23,10 +23,35 @@ import {
     TableRow,
 } from "@/components/ui/table";
 
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import { format, parseISO, differenceInMinutes, endOfDay } from "date-fns";
 
-// Function to calculate remaining SLA time in hours
+// Function to format timestamp to "13:00 dd/mm/yyyy"
+const formatTimestamp = (timestamp) => {
+    return format(parseISO(timestamp), "HH:mm dd/MM/yyyy");
+};
+
+// Function to calculate remaining SLA time in hours and minutes
 const calculateRemainingSLA = (timestamp) => {
-    // Implementation
+    const timestampDate = parseISO(timestamp);
+    const now = new Date();
+    const endOfDayTime = new Date(timestampDate.getTime() + 86400000);;
+
+    if (now > endOfDayTime) {
+        return "00:00";
+    }
+
+    const minutesRemaining = differenceInMinutes(endOfDayTime, now);
+    const hoursRemaining = Math.floor(minutesRemaining / 60);
+    const remainingMinutes = minutesRemaining % 60;
+
+    return `${String(hoursRemaining)} hrs ${String(remainingMinutes).padStart(2, '0')} mins`;
 };
 
 const columns = [
@@ -69,7 +94,7 @@ const columns = [
             </Button>
         ),
         cell: ({ row }) => (
-            <div className="text-sm text-gray-500">{row.getValue("timestamp")}</div>
+            <div className="text-sm text-gray-500">{formatTimestamp(row.getValue("timestamp"))}</div>
         ),
     },
     {
@@ -96,6 +121,15 @@ function DataTable({ initialData }) {
     const [columnFilters, setColumnFilters] = useState([]);
     const [columnVisibility, setColumnVisibility] = useState({});
     const [rowSelection, setRowSelection] = useState({});
+    const [, setTick] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTick((tick) => tick + 1);
+        }, 60000); // Update every minute
+
+        return () => clearInterval(interval);
+    }, []);
 
     const table = useReactTable({
         data,
@@ -117,9 +151,17 @@ function DataTable({ initialData }) {
         setData,
     });
 
+    const handleTypeFilterChange = (value) => {
+        if (value === "all") {
+            table.setColumnFilters([]);
+        } else {
+            table.setColumnFilters([{ id: "type", value }]);
+        }
+    };
+
     return (
         <div className="w-full p-5 background_color min-h-screen font_lato">
-            <div className="flex items-center py-4">
+            <div className="flex items-center justify-between py-4">
                 <Input
                     placeholder="Filter company names..."
                     value={(table.getColumn("companyName")?.getFilterValue()) ?? ""}
@@ -128,6 +170,17 @@ function DataTable({ initialData }) {
                     }
                     className="max-w-sm shadow-sm"
                 />
+
+                <Select onValueChange={handleTypeFilterChange}>
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Filter" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="all">All</SelectItem>
+                        <SelectItem value="requirement">Requirement</SelectItem>
+                        <SelectItem value="complaint">Complaint</SelectItem>
+                    </SelectContent>
+                </Select>
             </div>
             <div className="rounded-md border bg-white shadow-sm">
                 <Table className="">

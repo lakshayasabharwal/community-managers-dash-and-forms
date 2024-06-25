@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center background_color">
       <div>
-        <h1 className="text-2xl font-semibold mb-6 p-5 text-center text-gray-800 font_lato">How can we help you?</h1>
+        <h1 className="text-2xl font-semibold mb-6 p-5 text-center text-gray-800 font_lato">What do you need help with?</h1>
         <div className="w-min">
           <div className="flex justify-center gap-4 mb-8 font_lato">
             <label className={`flex p-4 items-center justify-center w-48 h-32 bg-white rounded-xl shadow-md cursor-pointer hover:bg-gray-50 transition ${selectedOption === 'option1' ? 'ring-2 ring-gray-800' : ''}`}>
