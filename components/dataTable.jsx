@@ -32,7 +32,9 @@ import {
 } from "@/components/ui/select";
 import { format, parseISO, differenceInMinutes, endOfDay } from "date-fns";
 
-// Function to format timestamp to "13:00 dd/mm/yyyy"
+import axios from "axios";
+
+// Function to format timestamp to "HH:mm dd/mm/yyyy"
 const formatTimestamp = (timestamp) => {
     return format(parseISO(timestamp), "HH:mm dd/MM/yyyy");
 };
@@ -41,7 +43,7 @@ const formatTimestamp = (timestamp) => {
 const calculateRemainingSLA = (timestamp) => {
     const timestampDate = parseISO(timestamp);
     const now = new Date();
-    const endOfDayTime = new Date(timestampDate.getTime() + 86400000);;
+    const endOfDayTime = new Date(timestampDate.getTime() + 86400000);      //24 hours added to calculate SLA deadline
 
     if (now > endOfDayTime) {
         return "00:00";
@@ -115,18 +117,66 @@ const columns = [
     },
 ];
 
-function DataTable({ initialData }) {
-    const [data, setData] = useState(initialData);
+function DataTable() {
+    const [data, setData] = useState([
+        {
+            isDone: false,
+            companyName: "Company A",
+            timestamp: "2024-06-23T16:00:00Z",
+            type: "complaint",
+          },
+          {
+            isDone: true,
+            companyName: "Company B",
+            timestamp: "2024-06-20T12:00:00Z",
+            type: "requirement",
+          },
+          {
+            isDone: false,
+            companyName: "Company C",
+            timestamp: "2024-06-20T12:00:00Z",
+            type: "requirement",
+          }
+    ]);
+
     const [sorting, setSorting] = useState([]);
     const [columnFilters, setColumnFilters] = useState([]);
     const [columnVisibility, setColumnVisibility] = useState({});
     const [rowSelection, setRowSelection] = useState({});
     const [, setTick] = useState(0);
 
+
     useEffect(() => {
         const interval = setInterval(() => {
             setTick((tick) => tick + 1);
         }, 60000); // Update every minute
+
+        const getComplaints = async() => {
+            try {
+                const response = await axios.get('http://localhost:3001/complaints');
+                const complaintsData = response.data;
+                console.log(complaintsData);
+                //setData(prevData => [...prevData, ...complaintsData]);
+
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+        const getRequirements = async() => {
+            try {
+                const response = await axios.get('http://localhost:3001/requirements');
+                const requirementsData = response.data;
+                console.log(requirementsData);
+                //setData(prevData => [...prevData, ...requirementsData]);
+
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+        getComplaints();
+        getRequirements();
 
         return () => clearInterval(interval);
     }, []);
