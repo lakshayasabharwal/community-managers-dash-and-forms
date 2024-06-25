@@ -76,11 +76,11 @@ const columns = [
         enableHiding: false,
     },
     {
-        accessorKey: "companyName",
+        accessorKey: "company",
         header: "Company",
         cell: ({ row }) => (
             <div className="font-semibold text-gray-800 flex items-center gap-2">
-                {row.getValue("companyName")}
+                {row.getValue("company")}
             </div>
         ),
     },
@@ -108,7 +108,7 @@ const columns = [
     },
     {
         accessorKey: "sla",
-        header: "SLA (hrs)",
+        header: "SLA",
         cell: ({ row }) => (
             <div className="text-sm text-gray-500">
                 {calculateRemainingSLA(row.getValue("timestamp"))}
@@ -118,26 +118,9 @@ const columns = [
 ];
 
 function DataTable() {
-    const [data, setData] = useState([
-        {
-            isDone: false,
-            companyName: "Company A",
-            timestamp: "2024-06-23T16:00:00Z",
-            type: "complaint",
-          },
-          {
-            isDone: true,
-            companyName: "Company B",
-            timestamp: "2024-06-20T12:00:00Z",
-            type: "requirement",
-          },
-          {
-            isDone: false,
-            companyName: "Company C",
-            timestamp: "2024-06-20T12:00:00Z",
-            type: "requirement",
-          }
-    ]);
+    const [data, setData] = useState([]);
+    const [requirementData, setRequirementData] = useState([]);
+    const [complaintData, setComplaintData] = useState([]);
 
     const [sorting, setSorting] = useState([]);
     const [columnFilters, setColumnFilters] = useState([]);
@@ -145,40 +128,48 @@ function DataTable() {
     const [rowSelection, setRowSelection] = useState({});
     const [, setTick] = useState(0);
 
-
     useEffect(() => {
         const interval = setInterval(() => {
             setTick((tick) => tick + 1);
         }, 60000); // Update every minute
 
-        const getComplaints = async() => {
-            try {
-                const response = await axios.get('http://localhost:3001/complaints');
-                const complaintsData = response.data;
-                console.log(complaintsData);
-                //setData(prevData => [...prevData, ...complaintsData]);
-
-            } catch (error) {
-                console.error(error)
-            }
-        }
-
-        const getRequirements = async() => {
-            try {
-                const response = await axios.get('http://localhost:3001/requirements');
-                const requirementsData = response.data;
-                console.log(requirementsData);
-                //setData(prevData => [...prevData, ...requirementsData]);
-
-            } catch (error) {
-                console.error(error)
-            }
-        }
-
-        getComplaints();
-        getRequirements();
-
         return () => clearInterval(interval);
+    }, []);
+
+    useEffect(() => {
+        const getComplaints = async () => {
+            try {
+                const response = await axios.get("http://localhost:3001/complaints");
+                const complaintsResponseData = response.data.map((complaint) => ({
+                    ...complaint,
+                    type: "complaint"
+                }));
+                console.log(complaintsResponseData)
+                // setComplaintData(complaintsResponseData)
+                setData((prevData) => [...prevData, ...complaintsResponseData]);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        const getRequirements = async () => {
+            try {
+                const response = await axios.get("http://localhost:3001/requirements");
+                const requirementResponseData = response.data.map((requirement) => ({
+                    ...requirement,
+                    type: "requirement"
+                }));
+                console.log(requirementResponseData)
+                // setRequirementData(requirementResponseData)
+                setData((prevData) => [...prevData, ...requirementResponseData]);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        getRequirements();
+        getComplaints();
+
+        return () => {};
     }, []);
 
     const table = useReactTable({
@@ -214,9 +205,9 @@ function DataTable() {
             <div className="flex items-center justify-between py-4">
                 <Input
                     placeholder="Filter company names..."
-                    value={(table.getColumn("companyName")?.getFilterValue()) ?? ""}
+                    value={(table.getColumn("company")?.getFilterValue()) ?? ""}
                     onChange={(event) =>
-                        table.getColumn("companyName")?.setFilterValue(event.target.value)
+                        table.getColumn("company")?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm shadow-sm"
                 />
