@@ -31,13 +31,17 @@ function HelpForm() {
         // if(!process.env.API_DOMAIN){
         //      throw new Error('incorrect domain')
         // }
+
+        const timestamp = new Date().toISOString();
+
         try {
             const response = await axios.post(`http://localhost:3001/complaints`, {
                 company: formData.company,
                 complaint: formData.complaint,
                 inquirerName: formData.name,
                 inquirerContact: formData.contact,
-                isHandled: false
+                isHandled: false,
+                timestamp: timestamp
             });
             console.log(response.data);
             setFormData({
