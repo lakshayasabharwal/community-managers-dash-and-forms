@@ -36,6 +36,9 @@ import axios from "axios";
 
 // Function to format timestamp to "HH:mm dd/mm/yyyy"
 const formatTimestamp = (timestamp) => {
+    if(timestamp === ''){
+        return "";
+    }
     return format(parseISO(timestamp), "HH:mm dd/MM/yyyy");
 };
 
@@ -145,8 +148,8 @@ function DataTable() {
                     type: "complaint"
                 }));
                 console.log(complaintsResponseData)
-                // setComplaintData(complaintsResponseData)
-                setData((prevData) => [...prevData, ...complaintsResponseData]);
+                setComplaintData(complaintsResponseData)
+                // setData((prevData) => [...prevData, ...complaintsResponseData]);
             } catch (error) {
                 console.error(error);
             }
@@ -160,8 +163,8 @@ function DataTable() {
                     type: "requirement"
                 }));
                 console.log(requirementResponseData)
-                // setRequirementData(requirementResponseData)
-                setData((prevData) => [...prevData, ...requirementResponseData]);
+                setRequirementData(requirementResponseData)
+                // setData((prevData) => [...prevData, ...requirementResponseData]);
             } catch (error) {
                 console.error(error);
             }
@@ -171,6 +174,12 @@ function DataTable() {
 
         return () => {};
     }, []);
+
+    useEffect(() => {
+        if (requirementData.length > 0 && complaintData.length > 0) {
+            setData([...requirementData, ...complaintData]);
+        }
+    }, [requirementData, complaintData]);
 
     const table = useReactTable({
         data,
