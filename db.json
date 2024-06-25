@@ -77,18 +77,8 @@
       "delivery": "2024-07-30T00:00:00Z",
       "budget": 10000,
       "specialRequirement": "Flutter"
-    },
-    {
-      "id": "862e",
-      "hub": "gurgaon",
-      "domain": "technology",
-      "subdomain": "software development",
-      "requirement": "gg",
-      "delivery": "",
-      "budget": "",
-      "specialRequirements": "",
-      "timestamp": "1719310441924"
     }
+    
   ],
   "domains": [
     {
