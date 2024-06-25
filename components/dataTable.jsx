@@ -36,10 +36,15 @@ import axios from "axios";
 
 // Function to format timestamp to "HH:mm dd/mm/yyyy"
 const formatTimestamp = (timestamp) => {
-    if(timestamp === ''){
+    if(!timestamp){
         return "";
     }
-    return format(parseISO(timestamp), "HH:mm dd/MM/yyyy");
+    try {
+        return format(parseISO(timestamp), "HH:mm dd/MM/yyyy");
+    } catch (error) {
+        console.error(error);
+        return "";
+    }
 };
 
 // Function to calculate remaining SLA time in hours and minutes
