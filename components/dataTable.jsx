@@ -32,8 +32,13 @@ import {
 } from "@/components/ui/select";
 import { format, parseISO, differenceInMinutes, endOfDay } from "date-fns";
 
-// Function to format timestamp to "13:00 dd/mm/yyyy"
+import axios from "axios";
+
+// Function to format timestamp to "HH:mm dd/mm/yyyy"
 const formatTimestamp = (timestamp) => {
+    if(timestamp === ''){
+        return "";
+    }
     return format(parseISO(timestamp), "HH:mm dd/MM/yyyy");
 };
 
@@ -41,7 +46,7 @@ const formatTimestamp = (timestamp) => {
 const calculateRemainingSLA = (timestamp) => {
     const timestampDate = parseISO(timestamp);
     const now = new Date();
-    const endOfDayTime = new Date(timestampDate.getTime() + 86400000);;
+    const endOfDayTime = new Date(timestampDate.getTime() + 86400000);      //24 hours added to calculate SLA deadline
 
     if (now > endOfDayTime) {
         return "00:00";
@@ -74,11 +79,11 @@ const columns = [
         enableHiding: false,
     },
     {
-        accessorKey: "companyName",
+        accessorKey: "company",
         header: "Company",
         cell: ({ row }) => (
             <div className="font-semibold text-gray-800 flex items-center gap-2">
-                {row.getValue("companyName")}
+                {row.getValue("company")}
             </div>
         ),
     },
@@ -106,7 +111,7 @@ const columns = [
     },
     {
         accessorKey: "sla",
-        header: "SLA (hrs)",
+        header: "SLA",
         cell: ({ row }) => (
             <div className="text-sm text-gray-500">
                 {calculateRemainingSLA(row.getValue("timestamp"))}
@@ -115,8 +120,11 @@ const columns = [
     },
 ];
 
-function DataTable({ initialData }) {
-    const [data, setData] = useState(initialData);
+function DataTable() {
+    const [data, setData] = useState([]);
+    const [requirementData, setRequirementData] = useState([]);
+    const [complaintData, setComplaintData] = useState([]);
+
     const [sorting, setSorting] = useState([]);
     const [columnFilters, setColumnFilters] = useState([]);
     const [columnVisibility, setColumnVisibility] = useState({});
@@ -130,6 +138,48 @@ function DataTable({ initialData }) {
 
         return () => clearInterval(interval);
     }, []);
+
+    useEffect(() => {
+        const getComplaints = async () => {
+            try {
+                const response = await axios.get("http://localhost:3001/complaints");
+                const complaintsResponseData = response.data.map((complaint) => ({
+                    ...complaint,
+                    type: "complaint"
+                }));
+                console.log(complaintsResponseData)
+                setComplaintData(complaintsResponseData)
+                // setData((prevData) => [...prevData, ...complaintsResponseData]);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        const getRequirements = async () => {
+            try {
+                const response = await axios.get("http://localhost:3001/requirements");
+                const requirementResponseData = response.data.map((requirement) => ({
+                    ...requirement,
+                    type: "requirement"
+                }));
+                console.log(requirementResponseData)
+                setRequirementData(requirementResponseData)
+                // setData((prevData) => [...prevData, ...requirementResponseData]);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        getRequirements();
+        getComplaints();
+
+        return () => {};
+    }, []);
+
+    useEffect(() => {
+        if (requirementData.length > 0 && complaintData.length > 0) {
+            setData([...requirementData, ...complaintData]);
+        }
+    }, [requirementData, complaintData]);
 
     const table = useReactTable({
         data,
@@ -164,9 +214,9 @@ function DataTable({ initialData }) {
             <div className="flex items-center justify-between py-4">
                 <Input
                     placeholder="Filter company names..."
-                    value={(table.getColumn("companyName")?.getFilterValue()) ?? ""}
+                    value={(table.getColumn("company")?.getFilterValue()) ?? ""}
                     onChange={(event) =>
-                        table.getColumn("companyName")?.setFilterValue(event.target.value)
+                        table.getColumn("company")?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm shadow-sm"
                 />
