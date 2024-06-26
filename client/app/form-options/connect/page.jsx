@@ -28,13 +28,16 @@ function ConnectForm() {
     specialRequirements: '',
   });
 
+  //company of the user will be provided through their login credentials
+  const [userCompany, setUserCompany] = useState("Company A");
+
   useEffect(() => {
     const fetchHubs = async () => {
       try {
         const response = await axios.get('http://localhost:3001/hubs');
         const hubsData = response.data.map(hub => ({
           label: hub.location,
-          value: hub.location.toLowerCase()
+          value: hub.location
         }));
         setHubs(hubsData);
       } catch (error) {
@@ -47,7 +50,7 @@ function ConnectForm() {
         const response = await axios.get('http://localhost:3001/domains');
         const domainsData = response.data.map(domain => ({
           label: domain.name,
-          value: domain.name.toLowerCase()
+          value: domain.name
         }));
         setDomains(domainsData);
         setAllDomains(response.data);
@@ -75,7 +78,7 @@ function ConnectForm() {
       const selectedDomain = allDomains.find(domain => domain.name.toLowerCase() === value.toLowerCase());
       const subdomainsData = selectedDomain ? selectedDomain.subdomains.map(subdomain => ({
         label: subdomain.name,
-        value: subdomain.name.toLowerCase()
+        value: subdomain.name
       })) : [];
       setSubdomains(subdomainsData);
     }
@@ -88,6 +91,9 @@ function ConnectForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const timestamp = new Date().toISOString();
+
     if(formData.hub === '' || formData.domain === '' || formData.subdomain === ''){
       alert('required fields not filled')
       return;
@@ -101,7 +107,9 @@ function ConnectForm() {
         delivery: formData.delivery,
         budget: formData.budget,
         specialRequirements: formData.specialRequirements,
-        //timestamp: Date.now().toString()
+        timestamp: timestamp,
+        isHandled: false,
+        company: userCompany
       });
       console.log(response.data);
       setFormData({

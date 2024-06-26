@@ -10,6 +10,7 @@ import {
     useReactTable,
 } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
+import Link from 'next/link';
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -36,27 +37,38 @@ import axios from "axios";
 
 // Function to format timestamp to "HH:mm dd/mm/yyyy"
 const formatTimestamp = (timestamp) => {
-    if(timestamp === ''){
+    if (!timestamp) {
         return "";
     }
-    return format(parseISO(timestamp), "HH:mm dd/MM/yyyy");
+    try {
+        return format(parseISO(timestamp), "HH:mm dd/MM/yyyy");
+    } catch (error) {
+        console.error(error);
+        return "";
+    }
 };
 
 // Function to calculate remaining SLA time in hours and minutes
 const calculateRemainingSLA = (timestamp) => {
-    const timestampDate = parseISO(timestamp);
-    const now = new Date();
-    const endOfDayTime = new Date(timestampDate.getTime() + 86400000);      //24 hours added to calculate SLA deadline
+    try {
+        const timestampDate = parseISO(timestamp);
+        const now = new Date();
+        const endOfDayTime = new Date(timestampDate.getTime() + 86400000);      //24 hours added to calculate SLA deadline
 
-    if (now > endOfDayTime) {
-        return "00:00";
+        if (now > endOfDayTime) {
+            return "00:00";
+        }
+
+        const minutesRemaining = differenceInMinutes(endOfDayTime, now);
+        const hoursRemaining = Math.floor(minutesRemaining / 60);
+        const remainingMinutes = minutesRemaining % 60;
+
+        return `${String(hoursRemaining)} hrs ${String(remainingMinutes).padStart(2, '0')} mins`;
+    } catch (error) {
+        console.error("error calculating SLA", error);
+        return "";
     }
 
-    const minutesRemaining = differenceInMinutes(endOfDayTime, now);
-    const hoursRemaining = Math.floor(minutesRemaining / 60);
-    const remainingMinutes = minutesRemaining % 60;
-
-    return `${String(hoursRemaining)} hrs ${String(remainingMinutes).padStart(2, '0')} mins`;
 };
 
 const columns = [
@@ -66,11 +78,28 @@ const columns = [
         cell: ({ row, table }) => (
             <Checkbox
                 checked={row.getValue("isDone")}
-                onCheckedChange={(value) => {
-                    const updatedData = table.options.data.map((d, index) =>
-                        index === row.index ? { ...d, isDone: !!value } : d
-                    );
-                    table.setData(updatedData);
+                onCheckedChange={async (value) => {
+                    try {
+                        const rowData = row.original;
+                        const url =
+                            rowData.type === "requirement"
+                                ? `http://localhost:3001/requirements/${rowData.id}`
+                                : `http://localhost:3001/complaints/${rowData.id}`;
+                        const payload = rowData.type === "requirement"
+                            ? { isHandled: !!value }
+                            : { isHandled: !!value };
+
+                        // Make the Axios request to update the isDone property
+                        await axios.patch(url, payload);
+                        console.log('data updated')
+                        // Update the local state only if the request is successful
+                        const updatedData = table.options.data.map((d, index) =>
+                            index === row.index ? { ...d, isDone: !!value } : d
+                        );
+                        //table.setData(updatedData);
+                    } catch (error) {
+                        console.error('Failed to update isDone property:', error);
+                    }
                 }}
                 aria-label="Select row"
             />
@@ -81,11 +110,17 @@ const columns = [
     {
         accessorKey: "company",
         header: "Company",
-        cell: ({ row }) => (
-            <div className="font-semibold text-gray-800 flex items-center gap-2">
-                {row.getValue("company")}
-            </div>
-        ),
+        cell: ({ row }) => {
+            const url = `/admin/${row.getValue("type")}/${row.original.company}`
+            return (
+                <Link href={url}>
+                    <div className="font-semibold text-gray-800 flex items-center gap-2 hover:text-blue-500">
+                        {row.getValue("company")}
+                    </div>
+                </Link>
+            )
+
+        },
     },
     {
         accessorKey: "timestamp",
@@ -172,7 +207,7 @@ function DataTable() {
         getRequirements();
         getComplaints();
 
-        return () => {};
+        return () => { };
     }, []);
 
     useEffect(() => {
