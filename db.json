@@ -18,7 +18,7 @@
       "email": "contact@companyb.com",
       "url": "https://www.companyb.com",
       "domain": "Fintech",
-      "subdomain": "Accounting Software"
+      "subdomain": "Blockchain"
     },
     {
       "id": "3",
@@ -27,111 +27,283 @@
       "hub": "Gurgaon",
       "email": "contact@companyc.com",
       "url": "https://www.companyc.com",
-      "domain": "Fintech",
-      "subdomain": "Blockchain"
-    }
-  ],
-  "complaints": [
-    {
-      "id": "1",
-      "company": "Company A",
-      "complaint": "Coffee machine has stopped working.",
-      "timestamp": "2024-04-30T00:00:00Z",
-      "inquirerName": "Dhruv Saxena",
-      "inquirerContact": "1230981230",
-      "isHandled": false
+      "domain": "Healthcare",
+      "subdomain": "Medical Devices"
     },
     {
-      "id": "2",
-      "company": "Company B",
-      "complaint": "AC is malfunctioning",
-      "timestamp": "2024-03-30T00:00:00Z",
-      "inquirerName": "Tamatar Lal",
-      "inquirerContact": "1234350988",
-      "isHandled": false
-    }
-  ],
-  "requirements": [
-    {
-      "id": "1",
-      "company": "Company C",
-      "timestamp": "2024-03-30T00:00:00Z",
-      "isHandled": false,
-      "requirement": "Looking for a new accounting software that integrates with our current systems.",
-      "hub": "Gurgaon",
-      "domain": "Fintech",
-      "subdomain": "Accounting Software",
-      "delivery": "2024-09-30T00:00:00Z",
-      "budget": 50000,
-      "specialRequirement": "Must support multiple currencies"
+      "id": "4",
+      "name": "Company D",
+      "contact": "1234567893",
+      "hub": "Ahmedabad",
+      "email": "contact@companyd.com",
+      "url": "https://www.companyd.com",
+      "domain": "Retail",
+      "subdomain": "E-commerce"
     },
     {
-      "id": "2",
-      "company": "Company A",
-      "timestamp": "2024-03-30T00:00:00Z",
-      "isHandled": false,
-      "requirement": "Need to develop an app for our online business",
-      "hub": "Gurgaon",
-      "domain": "Technology",
-      "subdomain": "Software Development",
-      "delivery": "2024-07-30T00:00:00Z",
-      "budget": 10000,
-      "specialRequirement": "Flutter"
+      "id": "5",
+      "name": "Company E",
+      "contact": "1234567894",
+      "hub": "Ahmedabad",
+      "email": "contact@companye.com",
+      "url": "https://www.companye.com",
+      "domain": "Education",
+      "subdomain": "EdTech"
     }
-    
   ],
-  "domains": [
-    {
-      "id": "1",
-      "name": "Technology",
-      "subdomains": [
+    "complaints": [
+      {
+        "id": "1",
+        "company": "Company A",
+        "complaint": "Coffee machine has stopped working.",
+        "timestamp": "2024-04-30T00:00:00Z",
+        "inquirerName": "Dhruv Saxena",
+        "inquirerContact": "1230981230",
+        "isHandled": false
+      },
+      {
+        "id": "2",
+        "company": "Company A",
+        "complaint": "Internet connection is unstable.",
+        "timestamp": "2024-05-15T00:00:00Z",
+        "inquirerName": "Rahul Verma",
+        "inquirerContact": "1230981231",
+        "isHandled": false
+      },
+      {
+        "id": "3",
+        "company": "Company B",
+        "complaint": "Software update caused system crashes.",
+        "timestamp": "2024-06-01T00:00:00Z",
+        "inquirerName": "Priya Sharma",
+        "inquirerContact": "1230981232",
+        "isHandled": false
+      },
+      {
+        "id": "4",
+        "company": "Company C",
+        "complaint": "Printer is not working.",
+        "timestamp": "2024-05-20T00:00:00Z",
+        "inquirerName": "Anjali Patel",
+        "inquirerContact": "1230981223",
+        "isHandled": false
+      },
+      {
+        "id": "5",
+        "company": "Company D",
+        "complaint": "AC is malfunctioning",
+        "timestamp": "2024-06-30T00:00:00Z",
+        "inquirerName": "Tamatar Lal",
+        "inquirerContact": "1234350988",
+        "isHandled": false
+      }
+    ],
+      "requirements": [
         {
-          "id": 1,
-          "name": "Software Development"
+          "id": "1",
+          "company": "Company C",
+          "timestamp": "2024-03-30T00:00:00Z",
+          "isHandled": false,
+          "requirement": "Looking for a new accounting software that integrates with our current systems.",
+          "hub": "Gurgaon",
+          "domain": "Technology",
+          "subdomain": "Software Development",
+          "delivery": "2024-09-30T00:00:00Z",
+          "budget": 50000,
+          "specialRequirement": "Must support multiple currencies"
         },
         {
-          "id": 2,
-          "name": "Artificial Intelligence"
-        }
-      ]
-    },
-    {
-      "id": "2",
-      "name": "Healthcare",
-      "subdomains": [
-        {
-          "id": 3,
-          "name": "Medical Devices"
+          "id": "2",
+          "company": "Company A",
+          "timestamp": "2024-03-30T00:00:00Z",
+          "isHandled": false,
+          "requirement": "Need to develop an app for our online business",
+          "hub": "Gurgaon",
+          "domain": "Fintech",
+          "subdomain": "Blockchain",
+          "delivery": "2024-07-30T00:00:00Z",
+          "budget": 10000,
+          "specialRequirement": "Flutter"
         },
         {
-          "id": 4,
-          "name": "Pharmaceuticals"
-        }
-      ]
-    },
-    {
-      "id": "3",
-      "name": "Fintech",
-      "subdomains": [
-        {
-          "id": 5,
-          "name": "Accounting Software"
+          "id": "3",
+          "company": "Company B",
+          "timestamp": "2024-04-15T00:00:00Z",
+          "isHandled": false,
+          "requirement": "Need a CRM system for customer management.",
+          "hub": "Gurgaon",
+          "domain": "Fintech",
+          "subdomain": "Accounting Software",
+          "delivery": "2024-10-15T00:00:00Z",
+          "budget": 30000,
+          "specialRequirement": "Integration with existing software"
         },
         {
-          "id": 6,
-          "name": "Blockchain"
+          "id": "4",
+          "company": "Company E",
+          "timestamp": "2024-05-20T00:00:00Z",
+          "isHandled": false,
+          "requirement": "Develop an AI-based chatbot for customer support.",
+          "hub": "Ahmedabad",
+          "domain": "Technology",
+          "subdomain": "Artificial Intelligence",
+          "delivery": "2024-11-20T00:00:00Z",
+          "budget": 20000,
+          "specialRequirement": "Natural Language Processing"
+        },
+        {
+          "id": "5",
+          "company": "Company D",
+          "timestamp": "2024-06-10T00:00:00Z",
+          "isHandled": false,
+          "requirement": "Implement a cloud-based storage solution.",
+          "hub": "Ahmedabad",
+          "domain": "Technology",
+          "subdomain": "Cloud Computing",
+          "delivery": "2024-12-10T00:00:00Z",
+          "budget": 15000,
+          "specialRequirement": "High availability and scalability"
         }
-      ]
-    }
-  ],
-  "hubs": [
-    {
-      "id": "1",
-      "location": "Gurgaon"
-    },
-    {
-      "id": "2",
-      "location": "Ahmdebad"
-    }
-  ]
+      ],    
+    "domains": [
+      {
+        "id": "1",
+        "name": "Technology",
+        "subdomains": [
+          {
+            "id": "1",
+            "name": "Software Development"
+          },
+          {
+            "id": "2",
+            "name": "Artificial Intelligence"
+          },
+          {
+            "id": "3",
+            "name": "Cybersecurity"
+          },
+          {
+            "id": "4",
+            "name": "Cloud Computing"
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "name": "Healthcare",
+        "subdomains": [
+          {
+            "id": "5",
+            "name": "Medical Devices"
+          },
+          {
+            "id": "6",
+            "name": "Pharmaceuticals"
+          },
+          {
+            "id": "7",
+            "name": "Telemedicine"
+          },
+          {
+            "id": "8",
+            "name": "Health IT"
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "name": "Fintech",
+        "subdomains": [
+          {
+            "id": "9",
+            "name": "Accounting Software"
+          },
+          {
+            "id": "10",
+            "name": "Blockchain"
+          },
+          {
+            "id": "11",
+            "name": "Payment Processing"
+          },
+          {
+            "id": "12",
+            "name": "Lending Platforms"
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "name": "Education",
+        "subdomains": [
+          {
+            "id": "13",
+            "name": "E-learning"
+          },
+          {
+            "id": "14",
+            "name": "Education Management"
+          },
+          {
+            "id": "15",
+            "name": "EdTech"
+          },
+          {
+            "id": "16",
+            "name": "Student Information Systems"
+          }
+        ]
+      },
+      {
+        "id": "5",
+        "name": "Retail",
+        "subdomains": [
+          {
+            "id": "17",
+            "name": "E-commerce"
+          },
+          {
+            "id": "18",
+            "name": "Inventory Management"
+          },
+          {
+            "id": "19",
+            "name": "Supply Chain"
+          },
+          {
+            "id": "20",
+            "name": "Point of Sale Systems"
+          }
+        ]
+      }
+    ],
+  "hubs": {
+    "hubs": [
+      {
+        "id": "1",
+        "location": "Gurgaon"
+      },
+      {
+        "id": "2",
+        "location": "Ahmedabad"
+      },
+      {
+        "id": "3",
+        "location": "Bangalore"
+      },
+      {
+        "id": "4",
+        "location": "Mumbai"
+      },
+      {
+        "id": "5",
+        "location": "Noida"
+      },
+      {
+        "id": "6",
+        "location": "Pune"
+      }
+    ]
+  }
+  
 }
