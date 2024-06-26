@@ -1,8 +1,28 @@
 "use client"
 
-const CompanyView = () => {
+import { useEffect } from "react";
 
+const CompanyView = ({params}) => {
+    // const router = useRouter();
+    const {companyName} = params;
 
+    useEffect(() => {
+        console.log(companyName)
+        // const companyInfo = async () => {
+        //     try {
+        //         const response = await axios.get('http://localhost:3001/companies');
+        //         const hubsData = response.data.map(hub => ({
+        //             label: hub.location,
+        //             value: hub.location.toLowerCase()
+        //         }));
+        //         setHubs(hubsData);
+        //     } catch (error) {
+        //         console.error('Error fetching hubs:', error);
+        //     }
+        // };
+
+        // companyInfo(); 
+    }, []);
 
 
     return (
@@ -37,7 +57,7 @@ const CompanyView = () => {
                                 <th className="py-2 px-4 text-center">Phone No</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        {/* <tbody>
                             {companies.map((company, index) => (
                                 <tr key={company.id} className="text-center">
                                     <td className="py-2 px-4">{index + 1}</td>
@@ -47,7 +67,7 @@ const CompanyView = () => {
                                     <td className="py-2 px-4">{company.phone}</td>
                                 </tr>
                             ))}
-                        </tbody>
+                        </tbody> */}
                     </table>
 
                 </div>
