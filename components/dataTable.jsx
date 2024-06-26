@@ -10,6 +10,7 @@ import {
     useReactTable,
 } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
+import Link from 'next/link';
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -109,11 +110,17 @@ const columns = [
     {
         accessorKey: "company",
         header: "Company",
-        cell: ({ row }) => (
-            <div className="font-semibold text-gray-800 flex items-center gap-2">
-                {row.getValue("company")}
-            </div>
-        ),
+        cell: ({ row }) => {
+            const url = `/admin/${row.getValue("type")}/${row.original.company}`
+            return (
+                <Link href={url}>
+                    <div className="font-semibold text-gray-800 flex items-center gap-2 hover:text-blue-500">
+                        {row.getValue("company")}
+                    </div>
+                </Link>
+            )
+
+        },
     },
     {
         accessorKey: "timestamp",

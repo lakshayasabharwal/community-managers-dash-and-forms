@@ -1,22 +1,6 @@
 "use client"
 
 const CompanyView = () => {
-  const companies = [
-    {
-      id: 1,
-      name: 'Example Company',
-      iaHub: 'Example Hub',
-      email: 'example@example.com',
-      phone: '123-456-7890'
-    },
-    {
-      id: 1,
-      name: 'Example Company',
-      iaHub: 'Example Hub',
-      email: 'example@example.com',
-      phone: '123-456-7890'
-    },
-  ];
 
   return (
     <div className="min-h-screen background_color p-6 font_lato">
