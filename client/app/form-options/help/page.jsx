@@ -31,8 +31,8 @@ function HelpForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // if(!process.env.API_DOMAIN){
-        //      throw new Error('incorrect domain')
+        // if(!process.env.API_URL){
+        //      throw new Error('url not found')
         // }
 
         const timestamp = new Date().toISOString();
