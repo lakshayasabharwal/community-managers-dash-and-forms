@@ -277,32 +277,30 @@
       ]
     }
   ],
-  "hubs": {
-    "hubs": [
-      {
-        "id": "1",
-        "location": "Gurgaon"
-      },
-      {
-        "id": "2",
-        "location": "Ahmedabad"
-      },
-      {
-        "id": "3",
-        "location": "Bangalore"
-      },
-      {
-        "id": "4",
-        "location": "Mumbai"
-      },
-      {
-        "id": "5",
-        "location": "Noida"
-      },
-      {
-        "id": "6",
-        "location": "Pune"
-      }
-    ]
-  }
+  "hubs": [
+    {
+      "id": "1",
+      "location": "Gurgaon"
+    },
+    {
+      "id": "2",
+      "location": "Ahmedabad"
+    },
+    {
+      "id": "3",
+      "location": "Bangalore"
+    },
+    {
+      "id": "4",
+      "location": "Mumbai"
+    },
+    {
+      "id": "5",
+      "location": "Noida"
+    },
+    {
+      "id": "6",
+      "location": "Pune"
+    }
+  ]
 }
