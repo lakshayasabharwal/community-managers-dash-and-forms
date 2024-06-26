@@ -123,6 +123,7 @@ function ConnectForm() {
       });
 
       window.location.reload();         //to reset form
+      alert("form has been successfully submitted");
 
     } catch (error) {
       console.error('Error submitting form:', error);
