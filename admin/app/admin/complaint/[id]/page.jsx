@@ -1,31 +1,39 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const CompanyView = ({params}) => {
+const CompanyView = ({ params }) => {
     const [companyDatacomp, setCompanyDatacomp] = useState({});
     const [companyDatac, setCompanyDatac] = useState({});
-    const companyName = decodeURIComponent(params.id);
+    const complaintId = decodeURIComponent(params.id);
+    const [companyName, setCompanyName] = useState("");
 
     useEffect(() => {
         axios.get('http://localhost:3001/complaints')
             .then(response => {
-                const company = response.data.find(compl => compl.company === companyName);
-                setCompanyDatacomp(company);
+                const complaint = response.data.find(compl => compl.id === complaintId);
+                if (complaint) {
+                    setCompanyName(complaint.company);
+                    setCompanyDatacomp(complaint);
+                }
             })
             .catch(error => {
-                console.error("There was an error fetching the company data!", error);
+                console.error("There was an error fetching the complaint data!", error);
             });
+    }, [complaintId]);
 
-        axios.get('http://localhost:3001/companies')
-            .then(response => {
-                const company1 = response.data.find(compa => compa.name === companyName);
-                setCompanyDatac(company1);
-            })
-            .catch(error => {
-                console.error("There was an error fetching the company data!", error);
-            });
-    }, []);
+    useEffect(() => {
+        if (companyName) {
+            axios.get('http://localhost:3001/companies')
+                .then(response => {
+                    const company1 = response.data.find(compa => compa.name === companyName);
+                    setCompanyDatac(company1 || {});
+                })
+                .catch(error => {
+                    console.error("There was an error fetching the company data!", error);
+                });
+        }
+    }, [companyName]);
 
     return (
         <div className="min-h-screen background_color p-6 font_lato">

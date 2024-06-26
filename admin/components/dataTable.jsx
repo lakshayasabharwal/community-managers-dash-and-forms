@@ -111,7 +111,7 @@ const columns = [
         accessorKey: "company",
         header: "Company",
         cell: ({ row }) => {
-            const url = `/admin/${row.getValue("type")}/${row.original.company}`
+            const url = `/admin/${row.getValue("type")}/${row.original.id}`
             return (
                 <Link href={url}>
                     <div className="font-semibold text-gray-800 flex items-center gap-2 hover:text-blue-500">

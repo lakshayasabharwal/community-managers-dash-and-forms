@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -7,18 +7,20 @@ const CompanyView = ({ params }) => {
   const [companyData, setCompanyData] = useState(null);
   const [companyDatamore, setCompanyDatamore] = useState(null);
   const [suggestedCompanies, setSuggestedCompanies] = useState([]);
-  const companyName = decodeURIComponent(params.id);
+  const [companyName, setCompanyName] = useState("");
+  const requirementId = decodeURIComponent(params.id);
 
   useEffect(() => {
     const fetchCompanyData = async () => {
       try {
         const response = await axios.get('http://localhost:3001/requirements'); 
-        const company = response.data.find(item => item.company === companyName);
+        const company = response.data.find(item => item.id === requirementId);
         setCompanyData(company);
 
         if (company) {
+          setCompanyName(company.company);
           const companiesResponse = await axios.get('http://localhost:3001/companies');
-          const similarCompanies = companiesResponse.data.filter(item => item.domain === company.domain && item.subdomain === company.subdomain && item.name !== companyName);
+          const similarCompanies = companiesResponse.data.filter(item => item.domain === company.domain && item.subdomain === company.subdomain && item.name !== company.company);
           setSuggestedCompanies(similarCompanies);
         }
 
@@ -27,18 +29,23 @@ const CompanyView = ({ params }) => {
       }
     };
 
-    const fetchCompanyDatamore = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/companies'); 
-        const companyd = response.data.find(item => item.name === companyName);
-        setCompanyDatamore(companyd);
-      } catch (error) {
-        console.error("There was an error fetching the company data!", error);
-      }
-    };
-
     fetchCompanyData();
-    fetchCompanyDatamore();
+  }, [requirementId]);
+
+  useEffect(() => {
+    if (companyName) {
+      const fetchCompanyDatamore = async () => {
+        try {
+          const response = await axios.get('http://localhost:3001/companies'); 
+          const companyd = response.data.find(item => item.name === companyName);
+          setCompanyDatamore(companyd);
+        } catch (error) {
+          console.error("There was an error fetching the company data!", error);
+        }
+      };
+
+      fetchCompanyDatamore();
+    }
   }, [companyName]);
 
   return (
