@@ -37,7 +37,7 @@ function ConnectForm() {
         const response = await axios.get('http://localhost:3001/hubs');
         const hubsData = response.data.map(hub => ({
           label: hub.location,
-          value: hub.location.toLowerCase()
+          value: hub.location
         }));
         setHubs(hubsData);
       } catch (error) {
@@ -50,7 +50,7 @@ function ConnectForm() {
         const response = await axios.get('http://localhost:3001/domains');
         const domainsData = response.data.map(domain => ({
           label: domain.name,
-          value: domain.name.toLowerCase()
+          value: domain.name
         }));
         setDomains(domainsData);
         setAllDomains(response.data);
@@ -78,7 +78,7 @@ function ConnectForm() {
       const selectedDomain = allDomains.find(domain => domain.name.toLowerCase() === value.toLowerCase());
       const subdomainsData = selectedDomain ? selectedDomain.subdomains.map(subdomain => ({
         label: subdomain.name,
-        value: subdomain.name.toLowerCase()
+        value: subdomain.name
       })) : [];
       setSubdomains(subdomainsData);
     }

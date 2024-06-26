@@ -1,24 +1,49 @@
 "use client"
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const CompanyView = () => {
+const CompanyView = ({params}) => {
+    const [companyDatacomp, setCompanyDatacomp] = useState({});
+    const [companyDatac, setCompanyDatac] = useState({});
+    const companyName = decodeURIComponent(params.id);
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/complaints')
+            .then(response => {
+                const company = response.data.find(compl => compl.company === companyName);
+                setCompanyDatacomp(company);
+            })
+            .catch(error => {
+                console.error("There was an error fetching the company data!", error);
+            });
+
+        axios.get('http://localhost:3001/companies')
+            .then(response => {
+                const company1 = response.data.find(compa => compa.name === companyName);
+                setCompanyDatac(company1);
+            })
+            .catch(error => {
+                console.error("There was an error fetching the company data!", error);
+            });
+    }, []);
 
     return (
         <div className="min-h-screen background_color p-6 font_lato">
             <div className="container mx-auto">
                 <div className="bg-white p-6 rounded-lg shadow-sm overflow-scroll hide_scrollbar">
-                    <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">Company Name</h1>
+                    <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">{companyDatac.name}</h1>
                     <h2 className="text-xl font-semibold text-gray-700 mb-2">Customer Information</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
-                        <div><span className="font-semibold">Inquirer name:</span></div>
-                        <div><span className="font-semibold">Inquirer's contact:</span></div>
+                        <div><span className="font-semibold">Inquirer name:</span> {companyDatacomp.inquirerName}</div>
+                        <div><span className="font-semibold">Inquirer's contact:</span> {companyDatacomp.inquirerContact}</div>
                     </div>
                     <h2 className="text-xl font-semibold text-gray-700 mb-2">Company Detail</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div><span className="font-semibold">IA Hub:</span></div>
-                        <div><span className="font-semibold">Email ID:</span></div>
-                        <div><span className="font-semibold">Contact No:</span></div>
-                        <div><span className="font-semibold">Website URL:</span></div>
-                        <div><span className="font-semibold">Query:</span></div>
+                        <div><span className="font-semibold">IA Hub:</span> {companyDatac.hub}</div>
+                        <div><span className="font-semibold">Email ID:</span> {companyDatac.email}</div>
+                        <div><span className="font-semibold">Contact No:</span> {companyDatac.contact}</div>
+                        <div><span className="font-semibold">Website URL:</span> {companyDatac.url}</div>
+                        <div><span className="font-semibold">Query:</span> {companyDatacomp.complaint}</div>
                     </div>
                 </div>
 
