@@ -1,6 +1,6 @@
 # Community Manager Dashboard
 
-This project is designed to help manage community interactions with an admin-side dashboard and two forms on the client side. The project uses Next.js for the front-end and JSON-Server for the back-end.
+git remote add origin https://github.com/lakshayasabharwal/community-managers-dash-and-forms.git
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@ To get a local copy up and running, follow these simple steps.
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/gautam-4/community-managers-dash-and-forms.git
+    git clone https://github.com/lakshayasabharwal/community-managers-dash-and-forms.git
     ```
 2. Navigate to the project directory:
     ```sh
@@ -57,3 +57,8 @@ The project is structured as follows:
     npm install
     npm run dev
     ```
+
+
+5. Make sure to run db.json on localhost:3001
+    and admin : on local host 3002  
+    and client : local host 3000

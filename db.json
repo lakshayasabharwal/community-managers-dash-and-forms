@@ -96,6 +96,15 @@
       "inquirerName": "Tamatar Lal",
       "inquirerContact": "1234350988",
       "isHandled": false
+    },
+    {
+      "id": "3a34",
+      "company": "Company A",
+      "complaint": "problem",
+      "inquirerName": "ndasndasl",
+      "inquirerContact": "30929043",
+      "isHandled": false,
+      "timestamp": "2024-09-07T07:59:01.115Z"
     }
   ],
   "requirements": [
